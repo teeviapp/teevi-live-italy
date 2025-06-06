@@ -16,6 +16,8 @@ The EPG data is available as a JSON file at:
 https://teeviapp.github.io/teevi-live-italy/data/epg-guide.json
 ```
 
+The data is formatted to be compatible with [Teevi](https://github.com/teeviapp/teevi-ts).
+
 ## Development
 
 To generate the EPG guide locally:

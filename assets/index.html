@@ -11,8 +11,8 @@
       rel="stylesheet" />
     <style>
       :root {
-        --primary-color: #2962ff;
-        --secondary-color: #448aff;
+        --primary-color: #008c45;
+        --secondary-color: #cd212a;
         --text-color: #333;
         --bg-color: #fff;
         --light-gray: #f5f7fa;
@@ -42,6 +42,36 @@
       header {
         margin-bottom: 40px;
         text-align: center;
+        position: relative;
+        padding-top: 15px;
+      }
+
+      .italy-flag-strip {
+        display: flex;
+        height: 8px;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        border-radius: 4px 4px 0 0;
+      }
+
+      .italy-flag-strip div {
+        flex: 1;
+        height: 100%;
+      }
+
+      .flag-green {
+        background-color: #008c45;
+      }
+
+      .flag-white {
+        background-color: #f4f5f0;
+      }
+
+      .flag-red {
+        background-color: #cd212a;
       }
 
       h1 {
@@ -103,14 +133,29 @@
           monospace;
       }
 
+      .api-note {
+        margin-top: 15px;
+        font-size: 0.95rem;
+        padding: 10px;
+        background-color: rgba(0, 140, 69, 0.1);
+        border-left: 3px solid var(--primary-color);
+        border-radius: 0 var(--radius) var(--radius) 0;
+      }
+
       .badge {
         display: inline-block;
         background-color: var(--secondary-color);
         color: white;
-        padding: 4px 10px;
+        padding: 4px 12px;
         border-radius: 20px;
         font-size: 0.85rem;
         margin-top: 5px;
+      }
+
+      .italian-icon {
+        font-size: 1.5em;
+        margin-right: 5px;
+        vertical-align: middle;
       }
 
       .info {
@@ -141,7 +186,7 @@
       }
 
       .icon-time {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232962ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cpolyline points='12 6 12 12 16 14'%3E%3C/polyline%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23008C45' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cpolyline points='12 6 12 12 16 14'%3E%3C/polyline%3E%3C/svg%3E");
       }
 
       .footer {
@@ -156,36 +201,53 @@
   </head>
   <body>
     <header>
+      <div class="italy-flag-strip">
+        <div class="flag-green"></div>
+        <div class="flag-white"></div>
+        <div class="flag-red"></div>
+      </div>
       <h1>Teevi Live Italy</h1>
       <p>
         Electronic Program Guide (EPG) data for Italian free-to-air TV channels
       </p>
-      <div class="badge">Updated daily</div>
+      <div class="badge">
+        <span class="italian-icon">🇮🇹</span> Aggiornato quotidianamente
+      </div>
     </header>
 
     <section>
       <p>
-        This service provides up-to-date Electronic Program Guide (EPG) data for
-        Italian free-to-air TV channels. The data is sourced from
-        <a href="https://www.open-epg.com" target="_blank">open-epg.com</a>.
+        Questo servizio fornisce dati EPG (Electronic Program Guide) aggiornati
+        per i canali televisivi italiani in chiaro. I dati sono forniti da
+        <a href="https://www.open-epg.com" target="_blank">open-epg.com</a> e
+        sono disponibili in un formato compatibile con
+        <a href="https://github.com/teeviapp/teevi-ts" target="_blank">Teevi</a
+        >.
       </p>
 
       <div class="card">
-        <h2>API Access</h2>
-        <p>You can access the EPG data directly via the following URL:</p>
+        <h2>Accesso API</h2>
+        <p>Puoi accedere ai dati EPG direttamente tramite il seguente URL:</p>
         <pre><code>https://teeviapp.github.io/teevi-live-italy/data/epg-guide.json</code></pre>
+        <p class="api-note">
+          I dati sono strutturati secondo il formato di
+          <a href="https://github.com/teeviapp/teevi-ts" target="_blank"
+            >Teevi</a
+          >, permettendo una facile integrazione con applicazioni che utilizzano
+          questa libreria.
+        </p>
       </div>
 
       <div class="info">
         <div class="updated">
           <span class="icon icon-time"></span>
-          Last updated: <span id="last-updated">Loading...</span>
+          Ultimo aggiornamento: <span id="last-updated">Caricamento...</span>
         </div>
       </div>
     </section>
 
     <footer class="footer">
-      <p>&copy; 2025 Teevi. ISC License</p>
+      <p>&copy; 2025 Teevi. Licenza ISC</p>
     </footer>
 
     <script>
@@ -195,11 +257,11 @@
           const lastModified = new Date(response.headers.get("last-modified"))
           document.getElementById(
             "last-updated"
-          ).textContent = `${lastModified.toLocaleString()}`
+          ).textContent = `${lastModified.toLocaleString("it-IT")}`
         })
         .catch((error) => {
           document.getElementById("last-updated").textContent =
-            "Unable to determine last update time"
+            "Impossibile determinare l'orario dell'ultimo aggiornamento"
           console.error("Error fetching last modified date:", error)
         })
     </script>
