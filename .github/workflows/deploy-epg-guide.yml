@@ -44,7 +44,7 @@ jobs:
         run: |
           mkdir -p ./tmp/data
           cp ./assets/data/epg-guide.json ./tmp/data/
-          cp ./assets/index.html ./tmp/
+          cp ./public/index.html ./tmp/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
