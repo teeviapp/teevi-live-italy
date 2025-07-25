@@ -31,14 +31,17 @@ async function fetchPrograms(): Promise<TeeviLiveProgram[]> {
 export default {
   fetchLiveChannels: async () => {
     const playlist = await fetchPlaylist()
-    return playlist.items.map((item) => ({
-      id: item.tvg.id,
-      name: item.name.replace(/[ⒼⓈ]/g, "").trim(),
-      type: "channel",
-      logoURL: item.tvg.logo,
-      language: "it",
-      geoblocked: item.tvg.name.includes("Ⓖ"),
-    }))
+    return playlist.items.map((item) => {
+      const id = item.tvg.id || item.name.replace(/\s+/g, ".").toLowerCase()
+      return {
+        id,
+        name: item.name.replace(/[ⒼⓈ]/g, "").trim(),
+        type: "channel",
+        logoURL: item.tvg.logo,
+        language: "it",
+        geoblocked: item.tvg.name.includes("Ⓖ"),
+      }
+    })
   },
   fetchChannelPrograms: async (startDate?: string, endDate?: string) => {
     let programs = await fetchPrograms()
