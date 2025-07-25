@@ -14,12 +14,12 @@
   "license": "ISC",
   "description": "Supporta i canali TV italiani ufficiali disponibili gratuitamente e legalmente in chiaro",
   "dependencies": {
-    "@teeviapp/core": "^0.9.0",
+    "@teeviapp/core": "^0.9.6",
     "fast-xml-parser": "^5.2.3",
     "iptv-playlist-parser": "^0.14.0"
   },
   "devDependencies": {
-    "@teeviapp/vite": "^0.9.0",
+    "@teeviapp/vite": "^0.9.6",
     "@types/node": "^22.15.30",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
