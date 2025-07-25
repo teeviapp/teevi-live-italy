@@ -61,7 +61,10 @@ export default {
   },
   fetchLiveVideoAsset: async (channelId: string) => {
     const playlist = await fetchPlaylist()
-    const channel = playlist.items.find((item) => item.tvg.id === channelId)
+    const channel = playlist.items.find((item) => {
+      const itemId = item.tvg.id || item.name.replace(/\s+/g, ".").toLowerCase()
+      return itemId === channelId
+    })
     if (!channel) {
       return null
     }
