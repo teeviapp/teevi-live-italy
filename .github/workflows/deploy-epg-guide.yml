@@ -1,7 +1,8 @@
 name: Deploy EPG Guide
 
 on:
-  - cron: "0 2 * * *" # Runs at 2:00 AM UTC every day
+  schedule:
+    - cron: "0 2 * * *" # Runs at 2:00 AM UTC every day
   workflow_dispatch:
 
 permissions:
