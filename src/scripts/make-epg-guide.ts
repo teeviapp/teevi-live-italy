@@ -283,13 +283,15 @@ function convertEPGProgrammeToTeeviLiveProgram(
     .map((program) => {
       let channelId = mapChannelId(program.channel)
       let sanitizedDescription =
-        program.desc === "-" || !program.desc ? undefined : program.desc
+        program.desc === "-" || !program.desc ? undefined : String(program.desc)
+      let startDate = parseDateToISOUTC(program.start)
+      let endDate = parseDateToISOUTC(program.stop)
       return {
-        id: `${channelId}-${program.start}`, // Unique ID based on channel and start time
-        title: program.title,
+        id: `${channelId}-${startDate.slice(0, 16)}`, // Unique ID based on channel and start time without seconds
+        title: String(program.title),
         description: sanitizedDescription,
-        startDate: parseDateToISOUTC(program.start),
-        endDate: parseDateToISOUTC(program.stop),
+        startDate: startDate,
+        endDate: endDate,
         channelId: channelId,
       }
     })
